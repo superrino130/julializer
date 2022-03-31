@@ -10,7 +10,7 @@ module Julializer
         instance_variable_set("@#{k}", config[k] || v)
       end
       #File.write("./__julialize_debug.log", Ripper.sexp(source).pretty_inspect)
-      transpile(Ripper.sexp(source))
+      transpile(Ripper.sexp(source)).gsub(";;", ";")
     end
 
     private
@@ -229,7 +229,9 @@ module Julializer
 
           when :command
             case s[1][1]
-            when "p", "puts", "printf", "print"
+            when "p", "puts"
+              c = "println"
+            when "printf", "print"
               c = "print"
             else
               c = transpile(s[1])

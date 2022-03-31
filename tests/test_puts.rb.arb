@@ -1,0 +1,40 @@
+require 'minitest/autorun'
+require_relative '../lib/julializer'
+
+class TestGets < Minitest::Test
+  def setup
+    @a = 1
+    @b = 3
+    @yes = 'Yes'
+    @tru = true
+    @arr = [1, 2, 3]
+  end
+
+  def test_puts_int
+    assert_equal Julializer.ruby2julia("puts 0"), "println(0);"
+  end
+
+  def test_puts_str
+    assert_equal Julializer.ruby2julia("puts 'Yes'"), 'println(string("Yes"));'
+  end
+
+  def test_puts_true
+    assert_equal Julializer.ruby2julia("puts true"), "println(true);"
+  end
+
+  def test_puts_false
+    assert_equal Julializer.ruby2julia("puts false"), "println(false);"
+  end
+
+  def test_puts_inline
+    assert_equal Julializer.ruby2julia('puts "#{@a} #{@yes} #{@tru}"'), "println();"
+  end
+
+  def test_puts_array
+    assert_equal Julializer.ruby2julia('puts [1, 2, 3]'), "println();"
+  end
+
+  def test_puts_array
+    assert_equal Julializer.ruby2julia('puts [1, 2, 3].join(" ")'), "println();"
+  end
+end

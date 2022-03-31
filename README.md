@@ -1,6 +1,8 @@
 A ruby2julia transpiler made with ❤️.
 
 original [rubygems julializer](https://rubygems.org/gems/julializer)
+
+Changes for [Atcoder](https://atcoder.jp)
 ## Requirement
 
 ~~Ruby(MRI) 1.9.3 and up~~
