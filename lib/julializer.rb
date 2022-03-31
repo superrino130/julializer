@@ -116,6 +116,15 @@ module Julializer
               else
                 transpile(s[3][1])
               end
+            when "gets", "readline"
+              case s[3][1]
+              when "to_i", "to_int"
+                "parse(Int64,readline())"
+              when "to_f"
+                "parse(Float64,readline())"
+              when "chomp"
+                "readline()"
+              end
             else
               case s[3][1]
               when "dup"
